@@ -3,7 +3,7 @@
 import { signOut, useSession } from "next-auth/react"; // Import useSession
 import { Button } from "@/components/ui/button";
 import { redirect } from "next/navigation";
-
+import { ModeToggle } from "@/components/ui/toggle";
 export default function Home() {
     const { data: session, status } = useSession(); // Use useSession to get session data
     if (status === "loading") {
@@ -23,6 +23,7 @@ export default function Home() {
                 <Button onClick={() => signOut()}>
                     Sign Out
                 </Button>
+                <ModeToggle />
             </div>
         </div>
     );
