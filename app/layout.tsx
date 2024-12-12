@@ -1,18 +1,6 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
-import { RootProvider } from "@/components/providers/root-provider"
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+import { ReactNode } from "react";
+import SessionLayout from "./(session)/sessionLayout"; // Import the session layout
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: "Chatly",
@@ -21,16 +9,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: ReactNode;
+}) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <RootProvider>{children}</RootProvider>
-      </body>
+      <SessionLayout>
+        {children}
+      </SessionLayout>
     </html>
   );
 }

@@ -1,18 +1,17 @@
 'use client'
 
-import { signOut, useSession } from "next-auth/react"
-import { Button } from "@/components/ui/button"
-import { redirect } from "next/navigation"
+import { signOut, useSession } from "next-auth/react"; // Import useSession
+import { Button } from "@/components/ui/button";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-    const { data: session, status } = useSession()
-
+    const { data: session, status } = useSession(); // Use useSession to get session data
     if (status === "loading") {
-        return <div>Loading...</div>
+        return <div>Loading...</div>; // Show loading state while session is being fetched
     }
 
     if (!session) {
-        redirect('/signin')
+        redirect('/signin'); // Redirect if not authenticated
     }
 
     return (
@@ -26,5 +25,5 @@ export default function Home() {
                 </Button>
             </div>
         </div>
-    )
+    );
 }
