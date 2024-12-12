@@ -9,8 +9,21 @@ export const authOptions: AuthOptions = {
             clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
         })
     ],
+    pages: {
+        signIn: '/signin',
+        signOut: '/signout',
+        error: '/signin',
+    },
     secret: process.env.NEXTAUTH_SECRET,
     session: {
         strategy: "jwt",
+    },
+    callbacks: {
+        async session({ session, token }) {
+            return session;
+        },
+        async jwt({ token, user }) {
+            return token;
+        },
     },
 };

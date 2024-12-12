@@ -1,10 +1,30 @@
-import { Button } from "@/components/ui/button";
+'use client'
+
+import { signOut, useSession } from "next-auth/react"
+import { Button } from "@/components/ui/button"
+import { redirect } from "next/navigation"
 
 export default function Home() {
-  return(
-    <div className="">
-      <div className="text-3xl m-10">Hello World!</div>
-      <Button size="lg" className="m-10">Click me!</Button>
-    </div>
-  );
+    const { data: session, status } = useSession()
+
+    if (status === "loading") {
+        return <div>Loading...</div>
+    }
+
+    if (!session) {
+        redirect('/signin')
+    }
+
+    return (
+        <div className="p-8">
+            <div className="flex justify-between items-center">
+                <div>
+                    Welcome, {session.user?.name}!
+                </div>
+                <Button onClick={() => signOut()}>
+                    Sign Out
+                </Button>
+            </div>
+        </div>
+    )
 }
