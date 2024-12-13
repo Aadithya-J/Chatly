@@ -4,6 +4,7 @@ import { Metadata } from 'next';
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { cn } from "@/lib/utils";
 
 
 const geistSans = localFont({
@@ -30,14 +31,14 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <SessionLayout>
-        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-          <ThemeProvider
+        <ThemeProvider
             attribute="class"
             defaultTheme="system"
             storageKey="chatly-theme">
+          <body className={cn(`${geistSans.variable} ${geistMono.variable} antialiased`,"bg-white","dark:bg-[#37414148]")}>
             {children}
-          </ThemeProvider>
-        </body>
+          </body>
+        </ThemeProvider>
       </SessionLayout>
     </html>
   );
